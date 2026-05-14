@@ -41,7 +41,7 @@ export default function ContactSection() {
             daniel.muljono@outlook.com
             <ArrowRight />
           </a>
-          <a className="btn btn-ghost" href="https://linkedin.com/in/danielmuljono" target="_blank" rel="noopener noreferrer">
+          <a className="btn btn-ghost" href="https://www.linkedin.com/in/daniel-ariel-muljono-76b972174/" target="_blank" rel="noopener noreferrer">
             View on LinkedIn
             <ArrowUpRight />
           </a>
@@ -55,8 +55,8 @@ export default function ContactSection() {
           Live from Jakarta · UTC+7
         </div>
         <nav className="fr" aria-label="Footer">
-          <a href="https://linkedin.com/in/danielmuljono" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://github.com/danielmuljono"      target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/daniel-ariel-muljono-76b972174/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/dmuljono"                                   target="_blank" rel="noopener noreferrer">GitHub</a>
           <a href="mailto:daniel.muljono@outlook.com">Email</a>
         </nav>
       </footer>
