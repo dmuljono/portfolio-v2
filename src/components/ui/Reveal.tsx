@@ -10,7 +10,10 @@ interface RevealProps {
   as?: keyof JSX.IntrinsicElements
 }
 
-export default function Reveal({ children, delay, className = '', as: Tag = 'div' }: RevealProps) {
+export default function Reveal({ children, delay, className = '', as = 'div' }: RevealProps) {
+  // Cast to a generic element type — sidesteps polymorphic ref typing
+  // friction without losing the runtime flexibility of the `as` prop.
+  const Tag = as as React.ElementType
   const ref = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -34,7 +37,6 @@ export default function Reveal({ children, delay, className = '', as: Tag = 'div
   }, [])
 
   return (
-    // @ts-expect-error — dynamic tag with ref is fine here
     <Tag
       ref={ref}
       className={`reveal ${className}`.trim()}
