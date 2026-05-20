@@ -8,9 +8,10 @@ interface RevealProps {
   delay?: 1 | 2 | 3 | 4 | 5
   className?: string
   as?: keyof JSX.IntrinsicElements
+  id?: string
 }
 
-export default function Reveal({ children, delay, className = '', as = 'div' }: RevealProps) {
+export default function Reveal({ children, delay, className = '', as = 'div', id }: RevealProps) {
   // Pragmatic cast — the polymorphic `as` prop is correct at runtime but
   // would require generics + complex ref forwarding to satisfy strict TS.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,6 +41,7 @@ export default function Reveal({ children, delay, className = '', as = 'div' }: 
   return (
     <Tag
       ref={ref}
+      id={id}
       className={`reveal ${className}`.trim()}
       data-delay={delay}
     >

@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 const LINKS = [
   { label: 'Intro',   id: 'intro' },
@@ -17,7 +19,17 @@ type LinkId = typeof LINKS[number]['id']
 // before it's considered "active". Matches the nav height + a small buffer.
 const ACTIVATION_OFFSET = 80
 
+// Map known case-study slugs to a display label for the nav breadcrumb
+const CASE_STUDY_TITLES: Record<string, string> = {
+  openclaw: 'OpenClaw',
+}
+
 export default function IslandNav() {
+  const pathname = usePathname()
+  const isCaseStudy = pathname?.startsWith('/work/') ?? false
+  const caseStudySlug = isCaseStudy ? pathname.split('/').pop() ?? '' : ''
+  const caseStudyTitle = CASE_STUDY_TITLES[caseStudySlug] ?? 'Case study'
+
   const [activeId, setActiveId] = useState<LinkId>('intro')
   const linkRefs    = useRef<(HTMLAnchorElement | null)[]>([])
   const indicatorRef = useRef<HTMLSpanElement>(null)
@@ -36,14 +48,17 @@ export default function IslandNav() {
     indicator.style.transform = `translateX(${link.offsetLeft}px)`
   }, [])
 
-  // Slide indicator whenever activeId changes
+  // Slide indicator whenever activeId changes (homepage only)
   useEffect(() => {
+    if (isCaseStudy) return
     const idx = LINKS.findIndex(l => l.id === activeId)
     moveIndicator(linkRefs.current[idx] ?? null)
-  }, [activeId, moveIndicator])
+  }, [activeId, moveIndicator, isCaseStudy])
 
   // Scroll-position tracker — runs on every scroll frame, no observer lag
   useEffect(() => {
+    if (isCaseStudy) return
+
     const getSections = () =>
       LINKS.map(l => document.getElementById(l.id)).filter(Boolean) as HTMLElement[]
 
@@ -84,23 +99,47 @@ export default function IslandNav() {
       window.removeEventListener('scroll', onScroll)
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
     }
-  }, [])
+  }, [isCaseStudy])
 
   // Re-align indicator on resize
   useEffect(() => {
+    if (isCaseStudy) return
     const onResize = () => {
       const idx = LINKS.findIndex(l => l.id === activeId)
       moveIndicator(linkRefs.current[idx] ?? null)
     }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
-  }, [activeId, moveIndicator])
+  }, [activeId, moveIndicator, isCaseStudy])
 
   const handleClick = useCallback((id: LinkId) => {
     // Snap the pill instantly on click — don't wait for the scroll event
     setActiveId(id)
   }, [])
 
+  // ─── Case-study variant ──────────────────────────────────────────────
+  if (isCaseStudy) {
+    return (
+      <nav className="island island-case-study" aria-label="Case study">
+        <Link href="/#work" className="case-study-nav-back">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M19 12H5" />
+            <path d="M12 19l-7-7 7-7" />
+          </svg>
+          <span>Back to portfolio</span>
+        </Link>
+
+        <span className="case-study-nav-divider" aria-hidden />
+
+        <div className="brand">
+          <span className="dot" />
+          <span className="name">{caseStudyTitle}</span>
+        </div>
+      </nav>
+    )
+  }
+
+  // ─── Default homepage variant ────────────────────────────────────────
   return (
     <nav className="island" aria-label="Primary">
       <span className="nav-indicator" aria-hidden="true" ref={indicatorRef} />
@@ -113,7 +152,7 @@ export default function IslandNav() {
       {LINKS.map((link, i) => (
         <a
           key={link.id}
-          href={`#${link.id}`}
+          href={`/#${link.id}`}
           className={`link${activeId === link.id ? ' active' : ''}`}
           ref={el => { linkRefs.current[i] = el }}
           onClick={() => handleClick(link.id)}

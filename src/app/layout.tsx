@@ -28,6 +28,11 @@ export const metadata: Metadata = {
   title: 'Daniel Muljono',
   description:
     'Jakarta-based technologist working across banking systems, risk governance, automation and AI-assisted workflows.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

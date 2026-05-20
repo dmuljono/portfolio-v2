@@ -30,7 +30,7 @@ const CASES: CaseStudy[] = [
     title: 'OpenClaw',
     description:
       'A multi-functional personal assistant for knowledge and finance — delivered through WhatsApp.',
-    href: '#',
+    href: '/work/openclaw',
     image: '/openclaw.png',
   },
   {

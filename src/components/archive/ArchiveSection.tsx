@@ -96,8 +96,9 @@ export default function ArchiveSection() {
 
               <p>
                 An earlier version explored a more playful, pixel-inspired interface with a
-                personal chatbot (&ldquo;Daniel-Bot&rdquo;). v2 keeps the conversational idea
-                — but moves toward a cleaner, more cinematic system.
+                personal chatbot (&ldquo;Daniel-Bot&rdquo;) powered by a ChatGPT workflow with
+                Logstash-fed Redis as the knowledge store. v2 keeps the conversational idea —
+                but moves toward a cleaner, more cinematic system.
               </p>
 
               <div className="archive-stats">
@@ -111,7 +112,11 @@ export default function ArchiveSection() {
                 </div>
                 <div className="as">
                   <div className="l">Built with</div>
-                  <div className="v">Next.js</div>
+                  <div className="v">Next.js · ChatGPT · Redis</div>
+                </div>
+                <div className="as">
+                  <div className="l">AI stack</div>
+                  <div className="v">ChatGPT workflow + Logstash → Redis</div>
                 </div>
                 <div className="as">
                   <div className="l">Status</div>
