@@ -30,6 +30,8 @@ export default function IslandNav() {
   const caseStudySlug = isCaseStudy ? pathname.split('/').pop() ?? '' : ''
   const caseStudyTitle = CASE_STUDY_TITLES[caseStudySlug] ?? 'Case study'
 
+  const isDateMenu = pathname === '/date-menu'
+
   const [activeId, setActiveId] = useState<LinkId>('intro')
   const linkRefs    = useRef<(HTMLAnchorElement | null)[]>([])
   const indicatorRef = useRef<HTMLSpanElement>(null)
@@ -116,6 +118,8 @@ export default function IslandNav() {
     // Snap the pill instantly on click — don't wait for the scroll event
     setActiveId(id)
   }, [])
+
+  if (isDateMenu) return null
 
   // ─── Case-study variant ──────────────────────────────────────────────
   if (isCaseStudy) {
