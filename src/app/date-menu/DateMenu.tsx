@@ -117,7 +117,9 @@ export default function DateMenu() {
       {/* ─── Menu content ───────────────────────────────────────── */}
       <main style={S.content}>
         <p className="dm-rise" style={S.eyebrow}>
-          · La Cena Privata di Daniel ·
+          ·<br />
+          La Cena Privata di Daniel<br />
+          ·
         </p>
 
         <h1 className="dm-rise" style={S.title}>
@@ -379,6 +381,7 @@ const S: Record<string, React.CSSProperties> = {
     textTransform: 'uppercase',
     color: GOLD_SOFT,
     textAlign: 'center',
+    lineHeight: 1.9,
     paddingLeft: '0.42em',
   },
   title: {
