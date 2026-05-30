@@ -260,12 +260,12 @@ const CSS = `
   }
   @keyframes dm-breathe {
     0%, 100% {
-      opacity: 0.5;
+      opacity: 0.35;
       text-shadow: 0 0 0 rgba(176, 141, 79, 0);
     }
     50% {
-      opacity: 1;
-      text-shadow: 0 0 22px rgba(176, 141, 79, 0.35);
+      opacity: 0.8;
+      text-shadow: 0 0 20px rgba(176, 141, 79, 0.28);
     }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -280,7 +280,7 @@ const CSS = `
       background: none;
       -webkit-text-fill-color: #2e241a;
     }
-    .dm-breathe { animation: none; opacity: 1; }
+    .dm-breathe { animation: none; opacity: 0.7; }
   }
 `
 
@@ -378,6 +378,7 @@ const S: Record<string, React.CSSProperties> = {
     letterSpacing: '0.42em',
     textTransform: 'uppercase',
     color: GOLD_SOFT,
+    textAlign: 'center',
     paddingLeft: '0.42em',
   },
   title: {
@@ -533,7 +534,7 @@ const S: Record<string, React.CSSProperties> = {
     fontSize: 'clamp(19px, 5.2vw, 25px)',
     lineHeight: 1.4,
     textAlign: 'center',
-    color: INK,
+    color: '#7c6a4e',
     maxWidth: '300px',
   },
 }
