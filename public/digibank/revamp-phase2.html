@@ -1213,20 +1213,19 @@ body {
         </div>
       </div>
 
-      <div class="theme-noti locked sq">
+      <div class="theme-noti sq" onclick="selectTheme('sq')">
         <div class="noti-row">
           <div class="noti-icon sq-bg"><i class="fa-solid fa-plane"></i></div>
           <div class="noti-body">
-            <div class="noti-title">SQ Air <span class="noti-badge progress"><i class="fa-solid fa-clock"></i> Sedang berjalan</span></div>
+            <div class="noti-title">SQ Flyer <span class="noti-badge"><i class="fa-solid fa-circle-check"></i> Tercapai</span></div>
             <div class="noti-sub">Terbang dengan Singapore Airlines 20 kali</div>
           </div>
-          <div class="noti-lock"><i class="fa-solid fa-lock"></i></div>
+          <div class="noti-check"><i class="fa-solid fa-check"></i></div>
         </div>
         <div class="noti-progress">
-          <div class="noti-track"><div class="noti-fill amber" style="width:60%;"></div></div>
-          <div class="noti-meta"><span>12 / 20 penerbangan</span><span class="noti-pct amber">60%</span></div>
+          <div class="noti-track"><div class="noti-fill" style="width:100%;"></div></div>
+          <div class="noti-meta"><span>20 / 20 penerbangan</span><span class="noti-pct">100%</span></div>
         </div>
-        <div class="noti-hint"><i class="fa-solid fa-lock"></i> Selesaikan challenge untuk membuka tema ini</div>
       </div>
     </div>
   </div>
@@ -1368,7 +1367,8 @@ function toggleRecipients(row) {
 const themeAssets = {
   default: { login: 'splash-bg.png', loginFit: 'contain', beranda: 'hero-banner.png' },
   mrt:     { login: 'MRT-login.png',  loginFit: 'contain', beranda: 'mrt-beranda.png' },
-  disney:  { login: 'disney-login.png', loginFit: 'cover', beranda: 'disney-beranda.png' }
+  disney:  { login: 'disney-login.png', loginFit: 'cover', beranda: 'disney-beranda.png' },
+  sq:      { login: 'sq-login.png',    loginFit: 'contain', beranda: 'sq-beranda.png', heroPos: 'center bottom' } // swap loginFit when SQ art is added
 };
 function applyTheme(t) {
   const a = themeAssets[t] || themeAssets.default;
@@ -1383,7 +1383,7 @@ function applyTheme(t) {
     sharp.style.top = cover ? '0' : '';
   }
   if (blur) blur.style.backgroundImage = "url('" + a.login + "')";
-  if (hero) hero.style.backgroundImage = "url('" + a.beranda + "')";
+  if (hero) { hero.style.backgroundImage = "url('" + a.beranda + "')"; hero.style.backgroundPosition = a.heroPos || 'center center'; }
   // themed Lainnya profile header
   const phone = document.querySelector('.phone');
   if (phone) {

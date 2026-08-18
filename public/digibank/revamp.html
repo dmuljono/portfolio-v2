@@ -1472,20 +1472,19 @@ body {
         </div>
       </div>
 
-      <div class="theme-noti locked sq">
+      <div class="theme-noti sq" onclick="selectTheme('sq')">
         <div class="noti-row">
           <div class="noti-icon sq-bg"><i class="fa-solid fa-plane"></i></div>
           <div class="noti-body">
-            <div class="noti-title">SQ Air <span class="noti-badge progress"><i class="fa-solid fa-clock"></i> Sedang berjalan</span></div>
+            <div class="noti-title">SQ Flyer <span class="noti-badge"><i class="fa-solid fa-circle-check"></i> Tercapai</span></div>
             <div class="noti-sub">Terbang dengan Singapore Airlines 20 kali</div>
           </div>
-          <div class="noti-lock"><i class="fa-solid fa-lock"></i></div>
+          <div class="noti-check"><i class="fa-solid fa-check"></i></div>
         </div>
         <div class="noti-progress">
-          <div class="noti-track"><div class="noti-fill amber" style="width:60%;"></div></div>
-          <div class="noti-meta"><span>12 / 20 penerbangan</span><span class="noti-pct amber">60%</span></div>
+          <div class="noti-track"><div class="noti-fill" style="width:100%;"></div></div>
+          <div class="noti-meta"><span>20 / 20 penerbangan</span><span class="noti-pct">100%</span></div>
         </div>
-        <div class="noti-hint"><i class="fa-solid fa-lock"></i> Selesaikan challenge untuk membuka tema ini</div>
       </div>
     </div>
   </div>
@@ -1523,6 +1522,11 @@ body {
     <div class="bs-opt" data-key="disney" onclick="setBadge('disney')">
       <div class="bs-ic" style="background:linear-gradient(150deg,#0063e5,#0b1530)"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
       <div class="bs-label">Disney+ Lover</div>
+      <i class="fa-solid fa-check bs-check"></i>
+    </div>
+    <div class="bs-opt" data-key="sq" onclick="setBadge('sq')">
+      <div class="bs-ic" style="background:linear-gradient(150deg,#b8902f,#0e2148)"><i class="fa-solid fa-plane"></i></div>
+      <div class="bs-label">SQ Flyer</div>
       <i class="fa-solid fa-check bs-check"></i>
     </div>
   </div>
@@ -1833,7 +1837,9 @@ const themeAssets = {
   mrt:     { login: 'MRT-login.png',  loginFit: 'contain', beranda: 'mrt-beranda.png',  qrisAccent: '#36a3e0', qrisFrame: 'mrt-inside.png', qrisPanelImg: null,
              accent: '#36a3e0', accentDeep: '#0a4d8c', accentSoft: '#e8f4fc', sweep: '#8fd0ff', navLine: '#36a3e0' },
   disney:  { login: 'disney-login.png', loginFit: 'fit', loginScale: 2, loginBg: '#0c1a3a', beranda: 'disney-beranda.png', qrisAccent: '#7b6cff', qrisFrame: 'disney-qris.png', qrisPanelImg: null,
-             accent: '#7b6cff', accentDeep: '#3d2f8f', accentSoft: '#efeaff', sweep: '#bcb3ff', navLine: null } // swap when Disney art is added
+             accent: '#7b6cff', accentDeep: '#3d2f8f', accentSoft: '#efeaff', sweep: '#bcb3ff', navLine: null }, // swap when Disney art is added
+  sq:      { login: 'sq-login.png',   loginFit: 'contain', beranda: 'sq-beranda.png', heroPos: 'center bottom',  qrisAccent: '#b8902f', qrisFrame: null, qrisPanelImg: null,
+             accent: '#b8902f', accentDeep: '#0e2148', accentSoft: '#f7f0dd', sweep: '#e6c877', navLine: '#b8902f' } // swap loginFit/qrisFrame when SQ art is added
 };
 function applyTheme(t) {
   currentTheme = t;
@@ -1879,6 +1885,7 @@ function applyTheme(t) {
   }
   if (hero) {
     hero.style.backgroundImage = "url('" + a.beranda + "')";
+    hero.style.backgroundPosition = a.heroPos || 'center center';
     if (document.getElementById('home').classList.contains('active')) requestAnimationFrame(buildHeroSampler);
   }
   applyQrisSkin();
@@ -1911,9 +1918,12 @@ function selectTheme(t) {
   // suggest a matching hero badge unless the user picked one themselves
   if (!badgeTouched) {
     if (t === 'mrt') setBadge('mrt', false);
+    else if (t === 'disney') setBadge('disney', false);
+    else if (t === 'sq') setBadge('sq', false);
     else if (t === 'default') setBadge('treasures', false);
   }
   if (changed && t === 'mrt') showToast('Tema MRT Rider aktif — selamat menikmati perjalanan!', 'fa-train-subway');
+  else if (changed && t === 'sq') showToast('Tema SQ Flyer aktif — selamat terbang bersama Singapore Airlines!', 'fa-plane');
 }
 
 // one-shot snackbar (reusable for any theme moment)
@@ -1932,7 +1942,8 @@ const badges = {
   customer:  { icon: 'fa-user',                label: 'Customer',      text: '#dfe3ea', ic: '#eef1f5', border: 'rgba(200,205,215,.55)' },
   treasures: { icon: 'fa-gem',                 label: 'DBS Treasures', text: '#e7c98a', ic: '#f0d49a', border: 'rgba(214,178,94,.6)' },
   mrt:       { icon: 'fa-train-subway',        label: 'MRT Rider',     text: '#8fd0ff', ic: '#b3e0ff', border: 'rgba(120,180,230,.6)' },
-  disney:    { icon: 'fa-wand-magic-sparkles', label: 'Disney+ Lover', text: '#bcc6ff', ic: '#d6ddff', border: 'rgba(150,165,255,.6)' }
+  disney:    { icon: 'fa-wand-magic-sparkles', label: 'Disney+ Lover', text: '#bcc6ff', ic: '#d6ddff', border: 'rgba(150,165,255,.6)' },
+  sq:        { icon: 'fa-plane',               label: 'SQ Flyer',      text: '#e6c877', ic: '#f0d99a', border: 'rgba(184,144,47,.6)' }
 };
 let currentBadge = 'treasures';
 let badgeTouched = false; // true once the user picks a badge manually — theme auto-suggest then backs off
