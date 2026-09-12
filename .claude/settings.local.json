@@ -9,7 +9,9 @@
       "Skill(claude-api)",
       "Skill(claude-api:*)",
       "PowerShell(New-Item -ItemType Directory -Force -Path \"C:\\\\Users\\\\danie\\\\portfolio-v2\\\\src\\\\app\\\\api\\\\chat\")",
-      "Bash(gh --version)"
+      "Bash(gh --version)",
+      "PowerShell(git add src/app/date-menu/ src/components/nav/IslandNav.tsx)",
+      "PowerShell($f = \"$env:USERPROFILE\\\\Desktop\\\\jeanie-menu-qr.png\"; if \\(Test-Path $f\\) { Get-Item $f | Select-Object FullName, Length } else { \"NOT FOUND YET\" })"
     ]
   }
 }

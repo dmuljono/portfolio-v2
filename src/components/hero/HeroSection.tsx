@@ -65,8 +65,8 @@ export default function HeroSection() {
           <HeroScene3D />
         </div>
         <div className="scene-caption">
-          <span>Learning node by node</span>
-          <span>in a world of knowledge</span>
+          <span>Navigating changing tides</span>
+          <span>Finding balance in motion</span>
         </div>
       </div>
 

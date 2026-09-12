@@ -2,7 +2,9 @@
 
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import MobiusOrb from './MobiusOrb'
+import dynamic from 'next/dynamic'
+
+const UltronSphere = dynamic(() => import('./UltronSphere'), { ssr: false })
 
 type Layer = 'haiku' | 'opus' | 'kb' | null
 
@@ -202,8 +204,8 @@ export default function AgentCard() {
 
       {/* Visual — orb in default state, layer icon when hovering */}
       <div className="agent-visual">
-        <div className={`agent-orb ${active ? 'fade-out' : 'fade-in'}`}>
-          <MobiusOrb />
+        <div style={{ mixBlendMode: 'screen' }} className={`agent-orb ${active ? 'fade-out' : 'fade-in'}`}>
+          <UltronSphere active={!active} />
         </div>
 
         <div className="agent-icon-stack">
